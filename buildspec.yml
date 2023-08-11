@@ -6,5 +6,5 @@ phases:
       #- echo "Updating Lambda function code..."
       #- aws lambda update-function-code --function-name nafees-test --publish --zip-file fileb://touseef-test.zip
       - echo "Creating Lambda function..."
-      - aws lambda create-function --function-name MyLambdaFunction --runtime nodejs14.x --role arn:aws:iam::aws:policy/AdministratorAccess --handler index.handler --zip-file fileb://lambda_code.zip
+      - aws lambda create-function --function-name MyLambdaFunction --runtime nodejs14.x --role arn:aws:iam::aws:policy/AdministratorAccess --handler index.handler --zip-file fileb://touseef-test.zip
 
