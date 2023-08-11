@@ -3,18 +3,33 @@ version: 0.2
 phases:
   build:
     commands:
+    - echo "Checking if Lambda function exists..."
+      - if aws lambda get-function --function-name MyLambdaFunction ; then
+          echo "Updating Lambda function...";
+          zip -r lambda_code.zip .;  # Create a zip archive of all files in the current directory
+          aws lambda update-function-code --function-name MyLambdaFunction --zip-file fileb://lambda_code.zip;
+        else
+          echo "Creating Lambda function...";
+          zip -r lambda_code.zip .;  # Create a zip archive of all files in the current directory
+          aws lambda create-function --function-name MyLambdaFunction --runtime python3.8 --role arn:aws:iam::207496619564:role/lambda-role --handler lambda_function.lambda_handler --zip-file fileb://lambda_code.zip;
+        fi
+
+artifacts:
+  files: lambda_code.zip  # Include the created zip archive in the build artifact
       #- echo "Updating Lambda function code..."
       #- aws lambda update-function-code --function-name nafees-test --publish --zip-file fileb://touseef-test.zip
       #- echo "Creating Lambda function..."
       #- aws lambda create-function --function-name MyLambdaFunction --runtime python3.8 --role arn:aws:iam::207496619564:role/lambda-role --handler lambda_function.lambda_handler --zip-file fileb://touseef-test.zip working
 
-  
-      - echo "Creating Lambda function..."
-      - zip -r lambda_code.zip .  # Create a zip archive of all files in the current directory
-      - aws lambda create-function --function-name MyLambdaFunction --runtime python3.8 --role arn:aws:iam::207496619564:role/lambda-role --handler lambda_function.lambda_handler --zip-file fileb://lambda_code.zip
+  # working with no need to upload zip file
+      #- echo "Creating Lambda function..."
+      #- zip -r lambda_code.zip .  # Create a zip archive of all files in the current directory
+      #- aws lambda create-function --function-name MyLambdaFunction --runtime python3.8 --role arn:aws:iam::207496619564:role/lambda-role --handler lambda_function.lambda_handler --zip-file fileb://lambda_code.zip
 
-artifacts:
-  files: lambda_code.zip  # Include the created zip archive in the build artifact
+#artifacts:
+ # files: lambda_code.zip  # Include the created zip archive in the build artifact
+
+ 
 
 
      
