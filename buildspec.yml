@@ -5,8 +5,16 @@ phases:
     commands:
       #- echo "Updating Lambda function code..."
       #- aws lambda update-function-code --function-name nafees-test --publish --zip-file fileb://touseef-test.zip
+      #- echo "Creating Lambda function..."
+      #- aws lambda create-function --function-name MyLambdaFunction --runtime python3.8 --role arn:aws:iam::207496619564:role/lambda-role --handler lambda_function.lambda_handler --zip-file fileb://touseef-test.zip working
+
+  
       - echo "Creating Lambda function..."
-      - aws lambda create-function --function-name MyLambdaFunction --runtime python3.8 --role arn:aws:iam::207496619564:role/lambda-role --handler lambda_function.lambda_handler --zip-file fileb://touseef-test.zip
+      - zip -r lambda_code.zip .  # Create a zip archive of all files in the current directory
+      - aws lambda create-function --function-name MyLambdaFunction --runtime python3.8 --role arn:aws:iam::207496619564:role/lambda-role --handler lambda_function.lambda_handler --zip-file fileb://lambda_code.zip
 
-      #- aws lambda create-function --function-name MyLambdaFunction --runtime nodejs14.x --role arn:aws:iam::aws:policy/AdministratorAccess --handler index.handler --zip-file fileb://touseef-test.zip
+artifacts:
+  files: lambda_code.zip  # Include the created zip archive in the build artifact
 
+
+     
