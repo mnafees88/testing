@@ -1,0 +1,7 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - echo "Updating Lambda function code..."
+      - aws lambda update-function-code --function-name touseef-test --publish --zip-file fileb://touseef-test.zip
