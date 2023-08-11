@@ -18,6 +18,10 @@ phases:
 
 artifacts:
   files: lambda_code.zip  # Include the created zip archive in the build artifact
+    
+      
+      
+      #update a existing lambda 
       #- echo "Updating Lambda function code..."
       #- aws lambda update-function-code --function-name nafees-test --publish --zip-file fileb://touseef-test.zip
       #- echo "Creating Lambda function..."
