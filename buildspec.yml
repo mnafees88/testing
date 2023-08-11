@@ -3,9 +3,9 @@ version: 0.2
 phases:
   build:
     commands:
-     - echo "Checking if Lambda function exists..."
+      - echo "Checking if Lambda function exists..."
       - existing_function=$(aws lambda list-functions --query "Functions[?FunctionName=='MyLambdaFunction'].FunctionName" --output text)
-      - |
+      - >
         if [ -z "$existing_function" ]; then
           echo "Creating Lambda function..."
           zip -r lambda_code.zip .
