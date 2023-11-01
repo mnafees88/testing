@@ -9,15 +9,16 @@ phases:
         if [ -z "$existing_function" ]; then
           echo "Creating Lambda function..."
           zip -r lambda_code.zip .
-          aws lambda create-function --function-name MyLambdaFunction2 --runtime python3.8 --role arn:aws:iam::207496619564:role/lambda-role --handler lambda_function.lambda_handler --zip-file fileb://lambda_code.zip
+          aws lambda create-function --function-name MyLambdaFunction-new --runtime python3.8 --role arn:aws:iam::207496619564:role/lambda-role --handler lambda_function.lambda_handler --zip-file fileb://lambda_code.zip
         else
           echo "Updating Lambda function..."
           zip -r lambda_code.zip .
-          aws lambda update-function-code --function-name MyLambdaFunction2 --zip-file fileb://lambda_code.zip
+          aws lambda update-function-code --function-name MyLambdaFunction-new --zip-file fileb://lambda_code.zip
         fi
 
 artifacts:
   files: lambda_code.zip  # Include the created zip archive in the build artifact
+
     
       
       
